@@ -59,5 +59,10 @@ function addItem() {
 addItem();
 
 function purchaseItem(name) {
+
+  const itemBought = prompt("which items are bought ?");
+
+  const itemBoughtIndex = groceriesList.
+
     
 }

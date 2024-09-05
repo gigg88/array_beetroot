@@ -49,4 +49,7 @@ function addItem() {
 
 addItem();
 
-function purchaseItem(name) {}
+function purchaseItem(name) {
+  var itemBought = prompt("which items are bought ?");
+  var itemBoughtIndex = groceriesList;
+}
