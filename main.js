@@ -44,7 +44,7 @@
     console.log(groceriesList);
 }
 
-displayGroceries();
+
 
 function addItem() {
 
@@ -59,10 +59,16 @@ function addItem() {
 addItem();
 
 function purchaseItem(name) {
+  const itemToPurchase = groceriesList.find(function(item) {
+    return item.name === name;
+  });
 
-  const itemBought = prompt("which items are bought ?");
-
-  const itemBoughtIndex = groceriesList.
-
-    
+  if (itemToPurchase) {
+    itemToPurchase.bought = true;
+  }
 }
+
+
+addItem();
+displayGroceries();
+purchaseItem("Bread");

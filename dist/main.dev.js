@@ -34,8 +34,6 @@ function displayGroceries() {
   console.log(groceriesList);
 }
 
-displayGroceries();
-
 function addItem() {
   var name = prompt("Enter the grocery name: ");
   var amount = prompt("Enter the amount: ");
@@ -50,6 +48,15 @@ function addItem() {
 addItem();
 
 function purchaseItem(name) {
-  var itemBought = prompt("which items are bought ?");
-  var itemBoughtIndex = groceriesList;
+  var itemToPurchase = groceriesList.find(function (item) {
+    return item.name === name;
+  });
+
+  if (itemToPurchase) {
+    itemToPurchase.bought = true;
+  }
 }
+
+addItem();
+displayGroceries();
+purchaseItem("Bread");
