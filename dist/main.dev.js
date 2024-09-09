@@ -1,21 +1,7 @@
 "use strict";
 
-//Part 1: The Grocery List
-//   Create the Array:
-//        Start with an array named groceriesList.
-//       Each item is an object with properties:
-//          name (string)
-//           amount (number)
-//           bought (boolean, false initially)
-//        Add a few sample items to your list.
-//    Functions:
-//     displayGroceries():
-//          Prints the list to the console.
-//          Challenge: Sort so unbought items appear first.
-//      addItem(name, amount):
-//          Adds a new item or increases the quantity if it already exists.
-//       purchaseItem(name):
-//          Marks an item as bought.
+// Part 1: The Grocery List
+// Create the Array:
 var groceriesList = [{
   name: "Milk",
   amount: 1,
@@ -26,37 +12,61 @@ var groceriesList = [{
   bought: false
 }, {
   name: "Bread",
+  amount: 2,
+  bought: false
+}, {
+  name: "Apples",
+  amount: 5,
+  bought: false
+}, {
+  name: "Pasta",
   amount: 1,
   bought: false
-}];
+}]; //displayGroceries():
+//Prints the list to the console.
+//Challenge: Sort so unbought items appear first.
 
 function displayGroceries() {
-  console.log(groceriesList);
-}
+  groceriesList.sort(function (a, b) {
+    return (a.bought ? 1 : 0) - (b.bought ? 1 : 0);
+  });
+  groceriesList.forEach(function (product) {
+    console.log("".concat(product.name, " (").concat(product.amount, ") - ").concat(product.bought ? "Bought" : "Not bought"));
+  });
+} //      addItem(name, amount):
+//    Adds a new item or increases the quantity if it already exists.
 
-function addItem() {
-  var name = prompt("Enter the grocery name: ");
-  var amount = prompt("Enter the amount: ");
-  var newGrocery = {
-    name: name,
-    amount: amount,
-    bought: false
-  };
-  groceriesList.push(newGrocery);
-}
 
-addItem();
-
-function purchaseItem(name) {
-  var itemToPurchase = groceriesList.find(function (item) {
-    return item.name === name;
+function addItem(name, amount) {
+  var existingProduct = groceriesList.find(function (product) {
+    return product.name === name;
   });
 
-  if (itemToPurchase) {
-    itemToPurchase.bought = true;
+  if (existingProduct) {
+    existingProduct.amount += amount;
+  } else {
+    groceriesList.push({
+      name: name,
+      amount: amount,
+      bought: false
+    });
+  }
+} //  purchaseItem(name):
+//  Marks an item as bought.
+
+
+function purchaseItem(name) {
+  var productIndex = groceriesList.findIndex(function (product) {
+    return product.name === name;
+  });
+
+  if (productIndex !== -1) {
+    groceriesList[productIndex].bought = true;
   }
 }
 
-addItem();
 displayGroceries();
-purchaseItem("Bread");
+addItem("Bananas", 3);
+addItem("Pizza", 2);
+purchaseItem("Pasta");
+displayGroceries();
